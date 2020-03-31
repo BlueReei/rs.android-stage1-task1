@@ -5,49 +5,45 @@ class HighestPalindrome {
     // TODO: Complete the following function
     fun highestValuePalindrome(n: Int, k: Int, digitString: String): String {
         var k = k
-        val palin = digitString.toCharArray()
+        val exPalindrome = digitString.toCharArray()
         var maxPalindome = ""
-        var l = 0
-        var r = digitString.length - 1
-        while (l < r) {
-            if (digitString[l] != digitString[r]) {
-                palin[r] = Math.max(digitString[l].toInt(), digitString[r].toInt()).toChar()
-                palin[l] = palin[r]
+        var left = 0
+        var right = digitString.length - 1
+        while (left < right) {
+            if (digitString[left] != digitString[right]) {
+                exPalindrome[right] = Math.max(digitString[left].toInt(), digitString[right].toInt()).toChar()
+                exPalindrome[left] = exPalindrome[right]
                 k--
             }
-            l++
-            r--
+            left++
+            right--
         }
         if (k < 0) {
             return "-1"
         }
-        l = 0
-        r = digitString.length - 1
-        while (l <= r) {
-            if (l == r) {
+        left = 0
+        right = digitString.length - 1
+        while (left <= right) {
+            if (left == right) {
                 if (k > 0) {
-                    palin[l] = '9'
+                    exPalindrome[left] = '9'
                 }
             }
-
-            if (palin[l] < '9') {
-                if (k >= 2 && palin[l] == digitString[l] && palin[r] == digitString[r]
-                ) {
+            if (exPalindrome[left] < '9') {
+                if (k >= 2 && exPalindrome[left] == digitString[left] && exPalindrome[right] == digitString[right]) {
                     k -= 2
-                    palin[r] = '9'
-                    palin[l] = palin[r]
-                } else if (k >= 1 && (palin[l] != digitString[l]
-                            || palin[r] != digitString[r])
-                ) {
+                    exPalindrome[right] = '9'
+                    exPalindrome[left] = exPalindrome[right]
+                } else if (k >= 1 && (exPalindrome[left] != digitString[left] || exPalindrome[right] != digitString[right])) {
                     k--
-                    palin[r] = '9'
-                    palin[l] = palin[r]
+                    exPalindrome[right] = '9'
+                    exPalindrome[left] = exPalindrome[right]
                 }
             }
-            l++
-            r--
+            left++
+            right--
         }
-        for (i in palin.indices) maxPalindome += palin[i]
+        for (i in exPalindrome.indices) maxPalindome += exPalindrome[i]
         return maxPalindome
     }
 }

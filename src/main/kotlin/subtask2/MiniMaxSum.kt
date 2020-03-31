@@ -9,12 +9,7 @@ class MiniMaxSum {
         var sum = 0
         var k = 0
         while (k < input.size) {
-            for (i in input.indices) {
-                if (k == i) {}
-                else {
-                    sum+=input[i]
-                }
-            }
+            for (i in input.indices) if (k != i) sum+=input[i]
             buffer += sum
             sum = 0
             k++
